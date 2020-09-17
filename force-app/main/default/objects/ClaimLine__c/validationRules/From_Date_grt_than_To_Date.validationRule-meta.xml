@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>From_Date_grt_than_To_Date</fullName>
+    <active>true</active>
+    <errorConditionFormula>To__c &lt; From__c</errorConditionFormula>
+    <errorDisplayField>To__c</errorDisplayField>
+    <errorMessage>To Date should be greater than From Date</errorMessage>
+</ValidationRule>

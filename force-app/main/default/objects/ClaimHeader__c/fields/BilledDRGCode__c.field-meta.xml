@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BilledDRGCode__c</fullName>
+    <description>Diagnosis-related group (DRG) code used for billing.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Diagnosis-related group (DRG) code used for billing.</inlineHelpText>
+    <label>BilledDRGCode</label>
+    <length>32</length>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

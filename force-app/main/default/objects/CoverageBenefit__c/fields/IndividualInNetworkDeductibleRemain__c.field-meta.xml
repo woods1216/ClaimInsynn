@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IndividualInNetworkDeductibleRemain__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>The remaining amount the member has to pay for care during the coverage year provided by the plan’s preferred providers for any family member. When this amount is reached, the plan starts to contribute towards treatment.</inlineHelpText>
+    <label>Individual InNetwork Deductible Remain</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

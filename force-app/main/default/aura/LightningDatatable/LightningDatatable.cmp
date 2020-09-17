@@ -1,0 +1,31 @@
+<aura:component controller="ClaimLineController"  implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+    
+    <aura:attribute name="searchTerm" type="String" />
+    <aura:attribute name="messageFromEvent" type="String"/>
+    <aura:attribute name="numEvents" type="Integer" default="0"/>
+
+    
+    <aura:attribute type="ClaimLine__c[]" name="clainLine"/>
+    <aura:attribute name="mycolumns" type="List"/>
+
+    <!-- Imports -->
+    <aura:attribute name="errors" type="Object" default="[]"/>
+    <aura:attribute name="draftValues" type="Object" default="[]"/>
+
+    <c:ceNotifier />
+    <!-- <p>{!v.messageFromEvent}</p> -->
+    <aura:handler name="cmpEvent" event="c:ceEvent" value="{!this}" action="{!c.fetchAcc}"/>
+    <br></br>
+    <br></br> 
+    <!-- <p>Number of events: {!v.numEvents}</p> -->
+
+    <lightning:datatable data="{! v.clainLine }"
+                         columns="{! v.mycolumns }"
+                         keyField="id"
+                         hideCheckboxColumn="true"
+                         errors="{! v.errors }"
+            			 draftValues="{! v.draftValues }"
+            		     onsave="{! c.handleSaveEdition }"
+                         />
+      
+</aura:component>

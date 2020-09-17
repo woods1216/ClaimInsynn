@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Affiliation__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>An affiliation to a government service, such as the army or navy.</inlineHelpText>
+    <label>Affiliation</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Army</fullName>
+                <default>false</default>
+                <label>Army</label>
+            </value>
+            <value>
+                <fullName>Navy</fullName>
+                <default>false</default>
+                <label>Navy</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

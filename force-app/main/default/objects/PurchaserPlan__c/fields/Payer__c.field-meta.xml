@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Payer__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>The ID of the payer’s Account object record.</inlineHelpText>
+    <label>Payer</label>
+    <referenceTo>Account</referenceTo>
+    <relationshipLabel>PurchaserPlan</relationshipLabel>
+    <relationshipName>PurchaserPlanPayer</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>true</reparentableMasterDetail>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

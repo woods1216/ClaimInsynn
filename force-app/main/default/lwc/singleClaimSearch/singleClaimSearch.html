@@ -1,0 +1,24 @@
+<template>
+    <lightning-card title="Search by Claim Number" icon-name="standard:search">
+        <div class="slds-var-m-around_medium">
+            <lightning-input
+                label="Claim #"
+                onchange={handleSearchChange}
+                value={claimNum}
+            ></lightning-input>
+            <lightning-button
+                label="Search"
+                variant="brand"
+                onclick={handleSearch}
+                class="slds-show slds-var-p-vertical_small"
+            ></lightning-button>
+            
+            <template if:true={claimId}>
+                Claim found {claimId}
+            </template>
+            <template if:false={claimId}>
+                Claim not found
+            </template>
+        </div>
+    </lightning-card>
+</template>

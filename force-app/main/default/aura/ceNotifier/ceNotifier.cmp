@@ -1,0 +1,16 @@
+<!--c:ceNotifier-->
+<aura:component>
+    <aura:attribute name="searchTerm" type="String" />
+    <aura:registerEvent name="cmpEvent" type="c:ceEvent"/>   
+
+    <h1>Claim Id Search<b></b></h1><div></div>
+	<ui:inputText label="Enter Claim Id" class="searchTerm" value="{!v.searchTerm}"/>
+    
+    <!--
+    <p><lightning:input type="Text" label="Enter Claim ID" aura:id="searchTerm" value="{!v.searchTerm}"/> </p>
+    <p><lightning:button label="Search Claim" onclick="{!c.fireComponentEvent}"   </p> /> 
+    -->
+	<ui:button aura:id="button" buttonTitle="Click to see what you put into the field" class="button" label="Seach Claims" press="{!c.fireComponentEvent}"/>
+  
+     
+</aura:component>

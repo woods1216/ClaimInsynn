@@ -1,0 +1,86 @@
+<template>
+
+        <template if:false={wiredClaimRecord.data}>
+            <lightning-card>
+                <span class="slds-align_absolute-center no-boat-height">No Claim Header Found</span>
+            </lightning-card>
+        </template>
+                        
+        <template if:true={wiredClaimRecord.data}>
+
+            <lightning-card  variant="Narrow">
+                <h3 slot="title">
+                    <lightning-icon icon-name="standard:product" size="small"></lightning-icon>
+                     Claim Header
+                     <lightning-badge label={claimHeadName}></lightning-badge>
+                     <lightning-badge label={claimId}></lightning-badge>
+                </h3>
+
+                <template if:true={isUnlocked}>
+                    <lightning-button label="Edit" slot="actions" onclick={editClaimHeader}></lightning-button>
+                </template>
+        
+                <lightning-button-stateful slot="actions" variant="Narrow" 
+                    label-when-off="Locked"
+                    label-when-on="Unlocked"
+                    icon-name-when-off="utility:lock"
+                    icon-name-when-on="utility:unlock"
+                    selected={isUnlocked}
+                    onclick={handleClick}>
+                </lightning-button-stateful>
+                <!-- padding="around-small" size="12" small-device-size="6" medium-device-size="4" large-device-size="3" -->
+                <lightning-layout>
+                    <lightning-layout-item padding="around-small">
+                        <div class="header-column">
+                            <p class="field-title" title="Status">Status</p>
+                            <p>
+                                <span title="">{claimStatusId}</span>
+                            </p>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item padding="around-small">
+                        <div class="header-column">
+                            <p class="field-title" title="SubmittedOn">Submitted On</p>
+                            <p>
+                                <lightning-formatted-date-time value={claimSubmittedOn}></lightning-formatted-date-time>
+                            </p>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item padding="around-small">
+                        <div class="header-column">
+                            <p class="field-title" title="memberPlanId">Member Plan Id</p>
+                            <p>
+                                <lightning-formatted-text value={memberPlanId}></lightning-formatted-text>
+                            </p>
+                        </div>
+                    </lightning-layout-item>
+
+                    <lightning-layout-item padding="around-small">
+                        <div class="header-column">
+                            <p class="field-title" title="ClaimRollUpAmt">Claim Roll Up Amt</p>
+                            <p>
+                                <lightning-formatted-number value={claimAmountRollup} format-style="currency" currency-code="USD"></lightning-formatted-number>
+                            </p>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item padding="around-small">
+                        <div class="header-column">
+                            <p class="field-title" title="claimAdjudicatedDate">Adjudicated Date</p>
+                            <p>
+                                <lightning-formatted-date-time value={claimAdjudicatedDate}></lightning-formatted-date-time>
+                            </p>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item padding="around-small">
+                        <div class="header-column">
+                            <p class="field-title" title="claimAdjudicatedAmt">Adjudicated Amt</p>
+                            <p>
+                                <lightning-formatted-number value={claimAdjudicatedAmt} format-style="currency" currency-code="USD"></lightning-formatted-number>
+                            </p>
+                        </div>
+                    </lightning-layout-item>
+            </lightning-layout>
+        </lightning-card>
+ 
+        </template>
+</template>

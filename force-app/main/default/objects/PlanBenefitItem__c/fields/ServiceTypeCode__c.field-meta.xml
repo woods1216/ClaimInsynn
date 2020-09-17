@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ServiceTypeCode__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>The code for the type of service this plan benefit item provides for.</inlineHelpText>
+    <label>Service Type Code</label>
+    <length>32</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

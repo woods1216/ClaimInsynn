@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PlanType__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>The type of plan, with the following default options: &gt;&gt;</inlineHelpText>
+    <label>PlanType</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>PPO</fullName>
+                <default>false</default>
+                <label>PPO</label>
+            </value>
+            <value>
+                <fullName>HMO</fullName>
+                <default>false</default>
+                <label>HMO</label>
+            </value>
+            <value>
+                <fullName>Medicare</fullName>
+                <default>false</default>
+                <label>Medicare</label>
+            </value>
+            <value>
+                <fullName>Medicaid</fullName>
+                <default>false</default>
+                <label>Medicaid</label>
+            </value>
+            <value>
+                <fullName>Workers Comp</fullName>
+                <default>false</default>
+                <label>Workers Comp</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

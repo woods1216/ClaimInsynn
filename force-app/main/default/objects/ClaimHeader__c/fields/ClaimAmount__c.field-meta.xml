@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ClaimAmount__c</fullName>
+    <externalId>false</externalId>
+    <label>ClaimAmount-Rollup</label>
+    <summarizedField>ClaimLine__c.Price__c</summarizedField>
+    <summaryForeignKey>ClaimLine__c.ClaimId__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

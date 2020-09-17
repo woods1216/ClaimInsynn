@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PlanBenefitId__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>The ID of the benefit this item belongs to.</inlineHelpText>
+    <label>Plan Benefit Id</label>
+    <referenceTo>PlanBenefit__c</referenceTo>
+    <relationshipLabel>PlanBenefitItem</relationshipLabel>
+    <relationshipName>PlanBenefitItemPlanId</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>true</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

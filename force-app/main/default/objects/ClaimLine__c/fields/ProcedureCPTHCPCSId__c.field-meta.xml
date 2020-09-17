@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ProcedureCPTHCPCSId__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <inlineHelpText>Service procedure code based on Current Procedural Terminology (CPT) or Healthcare Common Procedure Coding System (HCPCS).</inlineHelpText>
+    <label>ProcedureCPTHCPCSId</label>
+    <referenceTo>HealthCare_Procedure__c</referenceTo>
+    <relationshipLabel>ClaimLine</relationshipLabel>
+    <relationshipName>ClaimLineProcedure</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

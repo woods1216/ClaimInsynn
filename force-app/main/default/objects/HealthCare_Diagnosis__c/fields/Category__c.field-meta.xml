@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Category__c</fullName>
+    <description>Indicates the category for this diagnosis such as newborn, pediatric, maternity, or adult.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Indicates the category for this diagnosis such as newborn, pediatric, maternity, or adult.</inlineHelpText>
+    <label>Category</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>newborn</fullName>
+                <default>false</default>
+                <label>newborn</label>
+            </value>
+            <value>
+                <fullName>pediatric</fullName>
+                <default>false</default>
+                <label>pediatric</label>
+            </value>
+            <value>
+                <fullName>maternity</fullName>
+                <default>false</default>
+                <label>maternity</label>
+            </value>
+            <value>
+                <fullName>adult</fullName>
+                <default>false</default>
+                <label>adult</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

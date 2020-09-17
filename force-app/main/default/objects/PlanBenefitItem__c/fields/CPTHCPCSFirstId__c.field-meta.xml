@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CPTHCPCSFirstId__c</fullName>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <externalId>false</externalId>
+    <inlineHelpText>First CPT or HCPCS code for this Service procedure code</inlineHelpText>
+    <label>CPT First Code</label>
+    <referenceTo>HealthCare_Procedure__c</referenceTo>
+    <relationshipLabel>CPT First Code</relationshipLabel>
+    <relationshipName>CPTFirstId</relationshipName>
+    <required>true</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

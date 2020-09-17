@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OutofNetworkLifetimeMaximum__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>The most a member pays during the lifetime membership on this plan for health care provided by non-preferred providers. It includes deductibles, copayments, and coinsurance, but excludes premiums.</inlineHelpText>
+    <label>OutofNetwork Lifetime Maximum</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

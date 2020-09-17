@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ClaimLineNameValidation</fullName>
+    <active>false</active>
+    <errorConditionFormula>!REGEX(Name,&quot;^(\\d{11}(\\-\\d{3})?)?$&quot;)</errorConditionFormula>
+    <errorDisplayField>Name</errorDisplayField>
+    <errorMessage>Please use the format 20000001234-123</errorMessage>
+</ValidationRule>
