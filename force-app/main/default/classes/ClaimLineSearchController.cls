@@ -1,4 +1,4 @@
-public class ClaimLineController{
+public class ClaimLineSearchController{
     @AuraEnabled
     public static List <ClaimLine__c> fetchClaimLines(String searchTerm) {
         //Qyery 10 accounts

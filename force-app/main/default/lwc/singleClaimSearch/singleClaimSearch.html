@@ -15,10 +15,10 @@
             ></lightning-button>
             
             <template if:true={claimId}>
-                Claim found {claimId}
+                Claim {claimNum} {claimId} found
             </template>
             <template if:false={claimId}>
-                Claim not found
+                Claim {claimNum} not found. length {claimId.length}
             </template>
         </div>
     </lightning-card>

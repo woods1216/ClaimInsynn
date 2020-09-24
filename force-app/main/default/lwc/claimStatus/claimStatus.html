@@ -1,0 +1,20 @@
+<template>
+    <lightning-card>
+        <h3>
+             <lightning-badge label={claimId}></lightning-badge>
+             <lightning-badge label={steps}></lightning-badge>
+        </h3>
+    <!--             <template for:each={steps} for:item="step">       </template>      -->
+
+        <lightning-progress-indicator current-step="yyy" type="path" variant="base">
+
+                <lightning-progress-step label="xx1" value="yy1"></lightning-progress-step>
+                <lightning-progress-step label="xx2" value="yy2"></lightning-progress-step>
+        </lightning-progress-indicator>
+    <template if:false={steps}>
+        no data
+    </template>
+
+    </lightning-card>
+    
+</template>

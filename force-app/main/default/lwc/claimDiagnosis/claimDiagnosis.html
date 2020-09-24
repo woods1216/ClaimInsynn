@@ -1,0 +1,40 @@
+<template>
+    <lightning-card  variant="Narrow">
+        <h3 slot="title">
+        <!--    <lightning-icon icon-name="custom:custom58" size="small"></lightning-icon>
+            Claim Diagnosis Details
+        -->
+            <lightning-badge label={claimId}></lightning-badge>
+        </h3>
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading" size="small" variant="brand"></lightning-spinner>
+        </template>
+        <template if:true={claimDiagnosis.data}>
+            <div class="slds-scrollable_y">
+
+                <lightning-datatable
+                    key-field="id"
+                    data={claimDiagnosis.data}
+                    columns={columns}>
+              </lightning-datatable>
+            </div>
+        </template>
+        <template if:false={claimId}>
+            <lightning-card>
+                <span class="slds-align_absolute-center">Please select a claim</span>
+            </lightning-card>
+        </template>
+        <template if:false={claimDiagnosis.data}>
+            <lightning-card>
+                <span class="slds-align_absolute-center">No claim Diagnosis available</span>
+            </lightning-card>
+        </template>
+
+        <template if:true={error}>
+            <lightning-card>
+                <span class="slds-align_absolute-center">error loading claim lines</span>
+            </lightning-card>    
+        </template>
+    </lightning-card>
+    
+</template>

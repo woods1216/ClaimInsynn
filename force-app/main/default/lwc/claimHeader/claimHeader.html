@@ -1,32 +1,26 @@
 <template>
-
-        <template if:false={wiredClaimRecord.data}>
-            <lightning-card>
-                <span class="slds-align_absolute-center no-boat-height">No Claim Header Found</span>
-            </lightning-card>
-        </template>
                         
-        <template if:true={wiredClaimRecord.data}>
+        <lightning-card  variant="Narrow">
+            <h3 slot="title">
+                <lightning-icon icon-name="standard:data_integration_hub" size="small"></lightning-icon>
+                 Claim Header
+                 <lightning-badge label={claimId}></lightning-badge>
+            </h3>
 
-            <lightning-card  variant="Narrow">
-                <h3 slot="title">
-                    <lightning-icon icon-name="standard:product" size="small"></lightning-icon>
-                     Claim Header
-                     <lightning-badge label={claimHeadName}></lightning-badge>
-                     <lightning-badge label={claimId}></lightning-badge>
-                </h3>
-
-                <template if:true={isUnlocked}>
-                    <lightning-button label="Edit" slot="actions" onclick={editClaimHeader}></lightning-button>
+        <template if:true={claimHeader.data}>
+                <lightning-badge label={claimHeadName}></lightning-badge>
+                <template if:false={claimLockStatus}>
+                    <lightning-button label="Edit" variant="success" slot="actions" onclick={editClaimHeader}></lightning-button>
                 </template>
         
-                <lightning-button-stateful slot="actions" variant="Narrow" 
-                    label-when-off="Locked"
-                    label-when-on="Unlocked"
-                    icon-name-when-off="utility:lock"
-                    icon-name-when-on="utility:unlock"
-                    selected={isUnlocked}
-                    onclick={handleClick}>
+                <lightning-button-stateful slot="actions" variant="destructive" 
+                    label-when-off="Unlocked - Edit Mode"
+                    label-when-on="Locked - Read Only"
+                    label-when-hover="Unlock to edit"
+                    icon-name-when-off="utility:unlock"
+                    icon-name-when-on="utility:lock"
+                    selected={claimLockStatus}
+                    onclick={handleStatusReset}>
                 </lightning-button-stateful>
                 <!-- padding="around-small" size="12" small-device-size="6" medium-device-size="4" large-device-size="3" -->
                 <lightning-layout>
@@ -80,7 +74,24 @@
                         </div>
                     </lightning-layout-item>
             </lightning-layout>
-        </lightning-card>
- 
         </template>
+        <template if:false={claimId}>
+            <lightning-card>
+                <span class="slds-align_absolute-center">Please select a claim</span>
+            </lightning-card>
+        </template>
+        <template if:false={claimHeader.data}>
+            <lightning-card>
+                <span class="slds-align_absolute-center">No claim header available</span>
+            </lightning-card>
+        </template>
+
+        <template if:true={error}>
+            <lightning-card>
+                <span class="slds-align_absolute-center">error loading claim lines</span>
+            </lightning-card>    
+        </template>
+    </lightning-card>
+ 
+
 </template>

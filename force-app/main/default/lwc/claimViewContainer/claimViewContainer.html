@@ -1,0 +1,37 @@
+<template>
+  <lightning-layout multiple-rows>
+    <!-- Top -->
+    <lightning-layout-item size="12" flexibility="auto">
+      <c-claim-header claim-id={claimId}></c-claim-header>
+    </lightning-layout-item>
+
+    <!-- Bottom  -->
+    <lightning-layout-item size="12" class="slds-p-top_small slds-is-relative">
+      <lightning-tabset variant="scoped">
+        
+        <lightning-tab label="Claim Line1" icon-name="custom:custom83">
+          <div class="slds-scrollable_y">
+              <c-claim-line1></c-claim-line1>
+          </div>
+        </lightning-tab>
+        <lightning-tab label="Claim Line" icon-name="custom:custom83">
+          <div class="slds-scrollable_y">
+              <c-claim-line claim-id={claimId}></c-claim-line>
+          </div>
+        </lightning-tab>
+        <lightning-tab label="Claim Diagnosis" icon-name="custom:custom94">
+          <div class="slds-scrollable_y">
+              <c-claim-diagnosis claim-id={claimId}></c-claim-diagnosis>
+          </div>
+        </lightning-tab>
+
+
+
+        <lightning-tab label="wireGetObjectInfo" icon-name="custom:custom67">
+          <!-- boatsNearMe component goes here -->
+          <c-wire-get-object-info></c-wire-get-object-info>
+        </lightning-tab>
+      </lightning-tabset>
+    </lightning-layout-item>
+  </lightning-layout>
+</template>

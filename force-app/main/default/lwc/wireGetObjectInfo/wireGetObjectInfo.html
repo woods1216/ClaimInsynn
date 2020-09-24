@@ -1,0 +1,24 @@
+<template>
+    <!-- <lightning-card title="WireGetObjectInfo" icon-name="custom:custom67"> -->
+        <div class="slds-var-m-horizontal_medium">
+            <lightning-input
+                value="ClaimHeader__c"
+                placeholder="Enter object API name"
+                label="Search"
+            ></lightning-input>
+            <p class="slds-var-p-vertical_small">
+                <lightning-button
+                    label="Get Object Info"
+                    onclick={handleBtnClick}
+                ></lightning-button>
+            </p>
+            <template if:true={objectInfo.data}>
+                <div class="scroller">
+                    <pre>{objectInfoStr}</pre>
+                </div>
+            </template>
+        </div>
+        <template if:true={objectInfo.error}>
+            error
+        </template>
+</template>
