@@ -2,7 +2,7 @@ import { LightningElement, wire, api } from 'lwc';
 import { getRecord, getFieldValue, updateRecord, generateRecordInputForUpdate } from 'lightning/uiRecordApi';
 import { NavigationMixin } from 'lightning/navigation';
 
-//import { subscribe, MessageContext } from 'lightning/messageService';
+//import { publish, MessageContext } from 'lightning/messageService';
 //import CLAIM_SELECTED_CHANNEL from '@salesforce/messageChannel/Claim_Selected__c';
 
 import CLAIM_HEADER_OBJECT from '@salesforce/schema/ClaimHeader__c';
@@ -31,11 +31,13 @@ export default class ClaimHeader extends NavigationMixin(LightningElement) {
     claimHeaderObject = CLAIM_HEADER_OBJECT;
     error;
     @api claimId;
+    //claimStatus;
     claimHeader = undefined;
 
     @wire(getRecord, { recordId: '$claimId', fields: CLAIM_HEAD_FIELDS }) 
     wiredClaimRecord(result) {
         this.claimHeader = result;
+        //publishClaimStatus(this.claimId, this.claimStatusId);
         this.error = undefined;
         if (result.error) {
             this.claimHeader = undefined;
@@ -57,12 +59,13 @@ export default class ClaimHeader extends NavigationMixin(LightningElement) {
 
             updateRecord(recordInput)
             .then(data => {
-              const toastEvent = new ShowToastEvent({
-                title: SUCCESS_TITLE,
-                message: "Claim Status Reset to Draft",
-                variant: SUCCESS_VARIANT
-              });
-              this.dispatchEvent(toastEvent);
+                //publishClaimStatus(this.claimId, "Draft");
+                const toastEvent = new ShowToastEvent({
+                    title: SUCCESS_TITLE,
+                    message: "Claim Status Reset to Draft",
+                    variant: SUCCESS_VARIANT
+                });
+                this.dispatchEvent(toastEvent);
             })
             .catch(error => {
               const toastEvent = new ShowToastEvent({
@@ -120,29 +123,22 @@ export default class ClaimHeader extends NavigationMixin(LightningElement) {
         attributes: {
             recordId: this.claimId,
             objectApiName: 'ClaimHeader__c',
-            actionName: 'edit',
+            actionName: 'edit'
         },
         });
     }
-        
+
+    /*
     // By using the MessageContext @wire adapter, unsubscribe will be called
     // implicitly during the component descruction lifecycle.
-    //@wire(MessageContext)
-    //messageContext;
+    @wire(MessageContext)
+    messageContext;
 
-    // Encapsulate logic for LMS subscribe.
-    //subscribeToMessageChannel() {
-    //    this.subscription = subscribe(
-    //        this.messageContext,
-    //        CLAIM_SELECTED_CHANNEL,
-    //        (message) => this.handleMessage(message)
-    //    );
-    //}
-
-    // Handler for message received by component
-    //handleMessage(message) {
-    //    this.claimId = message.recordId;
-    //}
+    publishClaimStatus(id, status) {
+        const payload = { recordId: id, recordStatus: status };
+        publish(this.messageContext, CLAIM_SELECTED_CHANNEL, payload);
+    }
+    */
 
     // Standard lifecycle hooks used to sub/unsub to message channel
     //connectedCallback() {

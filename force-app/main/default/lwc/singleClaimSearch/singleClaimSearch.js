@@ -13,6 +13,7 @@ export default class SingleClaimSearch extends LightningElement {
     
     claimNum;
     claimId = '';
+    claimStatus = '';
     error;
 
     handleSearchChange(event) {
@@ -25,21 +26,17 @@ export default class SingleClaimSearch extends LightningElement {
     handleSearch() {
         getClaimHeaderId({ claimName: this.claimNum })
             .then(result => {
-                this.claimId = result.Id;
                 this.error = undefined;
-                const payload = { recordId: result.Id };
+                this.claimId = result.Id;
+                this.claimStatus = result.ClaimStatusId__c;
+                const payload = { recordId: result.Id, recordStatus: result.ClaimStatusId__c };
                 publish(this.messageContext, CLAIM_SELECTED_CHANNEL, payload);
             })
             .catch(error => {
-                //const evt = new ShowToastEvent({
-                //    title: ERROR_TITLE ,
-                //    message: error,
-                //    variant: ERROR_VARIANT
-                //    });
-                //this.dispatchEvent(evt);
                 this.error = error;
                 this.claimId = undefined;
-                const payload = { recordId: '' };
+                this.claimStatus = undefined;
+                const payload = { recordId: '', recordStatus: '' };
                 publish(this.messageContext, CLAIM_SELECTED_CHANNEL, payload);
 
             });

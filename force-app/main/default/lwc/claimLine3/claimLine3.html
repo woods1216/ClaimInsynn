@@ -1,5 +1,4 @@
 <template>
-   
     <lightning-card  variant="Narrow">
         <h3 slot="title">
         <!--    <lightning-icon icon-name="standard:product_item" size="small"></lightning-icon>
@@ -13,23 +12,18 @@
             <lightning-spinner alternative-text="Loading" size="small" variant="brand"></lightning-spinner>
         </template>
         <template if:true={claimLines}>
-            <!--
+            <!-- 
             <lightning-button label="Delete" variant="destructive" slot="actions" onclick={deleteClaimLine}></lightning-button>
             <lightning-button label="Edit" variant="success" slot="actions" onclick={editClaimLine}></lightning-button>
             -->
-            <template if:true={editClaim}>
-                <lightning-button label="Edit" variant="success" slot="actions" onclick={navigateToRelatedList}></lightning-button>
-            </template>
             <div class="slds-scrollable_y">
                 <lightning-datatable
-                    key-field="Id"
-                    data={claimLines}
-                    columns={columns}>
-                    <!--
-                    max-row-selection="1" 
-                    onrowselection={handleRowAction}>
-                    -->
-              </lightning-datatable>
+                columns={columns}
+                data={claimLines}
+                key-field="id"
+                onrowaction={handleRowAction}
+                ondblclick={handleRowDblClick}>
+                </lightning-datatable>
             </div>
         </template>
         <template if:false={claimId}>
@@ -49,4 +43,5 @@
             </lightning-card>    
         </template>
     </lightning-card>
+    
 </template>

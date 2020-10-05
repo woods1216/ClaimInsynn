@@ -1,0 +1,48 @@
+<template>
+  <lightning-card title="LWC Table">
+    <div class="slds-var-p-around_x-small">
+      <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+        <thead>
+          <tr class="">
+            <th class="slds-size_3-of-10" scope="col">
+              <div class="slds-truncate" title="Account Name">Account Name</div>
+            </th>
+            <th class="slds-size_3-of-10" scope="col">
+              <div class="slds-truncate" title="Actions">Actions</div>
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <template for:each={myList} for:item="item" for:index="indexVar">
+            <tr key={item.Id} class="slds-hint-parent">
+              <td class="slds-size_3-of-10" data-label="Prospecting">
+                <div title="Prospecting">
+               <!--
+                  <lightning-input
+                    key={item.Id}
+                    name={item.Id}
+                    label="Name"
+                    value={item.Name}
+                    variant="label-hidden"
+                  ></lightning-input>
+                -->
+                  <lightning-formatted-text value={item.Name}></lightning-formatted-text>
+                </div>
+              </td>
+              <td class="slds-size_1-of-10" data-label="Prospecting">
+                <a name={indexVar} data-id={item.Id} onclick={remove}>
+                  <lightning-icon
+                    icon-name="utility:delete"
+                    alternative-text="delete"
+                    size="small"
+                  ></lightning-icon>
+                </a>
+              </td>
+            </tr>
+          </template>
+        </tbody>
+      </table>
+    </div>
+  </lightning-card>
+</template>

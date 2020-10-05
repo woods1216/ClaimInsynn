@@ -15,7 +15,7 @@
             ></lightning-button>
             
             <template if:true={claimId}>
-                Claim {claimNum} {claimId} found
+                Claim {claimNum} {claimId} {claimStatus} found
             </template>
             <template if:false={claimId}>
                 Claim {claimNum} not found. length {claimId.length}

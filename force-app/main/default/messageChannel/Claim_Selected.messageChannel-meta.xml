@@ -7,4 +7,8 @@
         <fieldName>recordId</fieldName>
         <description>This is the record Id that changed</description>
     </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>recordStatus</fieldName>
+        <description>This is the record Status that changed</description>
+    </lightningMessageFields>
 </LightningMessageChannel>

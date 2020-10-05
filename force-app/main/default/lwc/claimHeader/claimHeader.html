@@ -1,97 +1,127 @@
 <template>
-                        
-        <lightning-card  variant="Narrow">
-            <h3 slot="title">
-                <lightning-icon icon-name="standard:data_integration_hub" size="small"></lightning-icon>
-                 Claim Header
-                 <lightning-badge label={claimId}></lightning-badge>
-            </h3>
+  <lightning-card variant="Narrow">
+    <h3 slot="title">
+      <lightning-icon
+        icon-name="standard:data_integration_hub"
+        size="small"
+      ></lightning-icon>
+      Claim Header
+      <lightning-badge label={claimId}></lightning-badge>
+    </h3>
 
-        <template if:true={claimHeader.data}>
-                <lightning-badge label={claimHeadName}></lightning-badge>
-                <template if:false={claimLockStatus}>
-                    <lightning-button label="Edit" variant="success" slot="actions" onclick={editClaimHeader}></lightning-button>
-                </template>
-        
-                <lightning-button-stateful slot="actions" variant="destructive" 
-                    label-when-off="Unlocked - Edit Mode"
-                    label-when-on="Locked - Read Only"
-                    label-when-hover="Unlock to edit"
-                    icon-name-when-off="utility:unlock"
-                    icon-name-when-on="utility:lock"
-                    selected={claimLockStatus}
-                    onclick={handleStatusReset}>
-                </lightning-button-stateful>
-                <!-- padding="around-small" size="12" small-device-size="6" medium-device-size="4" large-device-size="3" -->
-                <lightning-layout>
-                    <lightning-layout-item padding="around-small">
-                        <div class="header-column">
-                            <p class="field-title" title="Status">Status</p>
-                            <p>
-                                <span title="">{claimStatusId}</span>
-                            </p>
-                        </div>
-                    </lightning-layout-item>
-                    <lightning-layout-item padding="around-small">
-                        <div class="header-column">
-                            <p class="field-title" title="SubmittedOn">Submitted On</p>
-                            <p>
-                                <lightning-formatted-date-time value={claimSubmittedOn}></lightning-formatted-date-time>
-                            </p>
-                        </div>
-                    </lightning-layout-item>
-                    <lightning-layout-item padding="around-small">
-                        <div class="header-column">
-                            <p class="field-title" title="memberPlanId">Member Plan Id</p>
-                            <p>
-                                <lightning-formatted-text value={memberPlanId}></lightning-formatted-text>
-                            </p>
-                        </div>
-                    </lightning-layout-item>
+    <template if:true={claimHeader.data}>
+      <lightning-badge label={claimHeadName}></lightning-badge>
+      <template if:false={claimLockStatus}>
+        <lightning-button
+          label="Edit"
+          variant="success"
+          slot="actions"
+          onclick={editClaimHeader}
+        ></lightning-button>
+      </template>
 
-                    <lightning-layout-item padding="around-small">
-                        <div class="header-column">
-                            <p class="field-title" title="ClaimRollUpAmt">Claim Roll Up Amt</p>
-                            <p>
-                                <lightning-formatted-number value={claimAmountRollup} format-style="currency" currency-code="USD"></lightning-formatted-number>
-                            </p>
-                        </div>
-                    </lightning-layout-item>
-                    <lightning-layout-item padding="around-small">
-                        <div class="header-column">
-                            <p class="field-title" title="claimAdjudicatedDate">Adjudicated Date</p>
-                            <p>
-                                <lightning-formatted-date-time value={claimAdjudicatedDate}></lightning-formatted-date-time>
-                            </p>
-                        </div>
-                    </lightning-layout-item>
-                    <lightning-layout-item padding="around-small">
-                        <div class="header-column">
-                            <p class="field-title" title="claimAdjudicatedAmt">Adjudicated Amt</p>
-                            <p>
-                                <lightning-formatted-number value={claimAdjudicatedAmt} format-style="currency" currency-code="USD"></lightning-formatted-number>
-                            </p>
-                        </div>
-                    </lightning-layout-item>
-            </lightning-layout>
-        </template>
-        <template if:false={claimId}>
-            <lightning-card>
-                <span class="slds-align_absolute-center">Please select a claim</span>
-            </lightning-card>
-        </template>
-        <template if:false={claimHeader.data}>
-            <lightning-card>
-                <span class="slds-align_absolute-center">No claim header available</span>
-            </lightning-card>
-        </template>
+      <lightning-button-stateful
+        slot="actions"
+        variant="destructive"
+        label-when-off="Unlocked - Edit Mode"
+        label-when-on="Locked - Read Only"
+        label-when-hover="Unlock to edit"
+        icon-name-when-off="utility:unlock"
+        icon-name-when-on="utility:lock"
+        selected={claimLockStatus}
+        onclick={handleStatusReset}
+      >
+      </lightning-button-stateful>
+      <!-- padding="around-small" size="12" small-device-size="6" medium-device-size="4" large-device-size="3" -->
+      <lightning-layout>
+        <lightning-layout-item padding="around-small">
+          <div class="header-column">
+            <p class="field-title" title="Status">Status</p>
+            <p>
+              <span title="">{claimStatusId}</span>
+            </p>
+          </div>
+        </lightning-layout-item>
+        <lightning-layout-item padding="around-small">
+          <div class="header-column">
+            <p class="field-title" title="SubmittedOn">Submitted On</p>
+            <p>
+              <lightning-formatted-date-time
+                value={claimSubmittedOn}
+              ></lightning-formatted-date-time>
+            </p>
+          </div>
+        </lightning-layout-item>
+        <lightning-layout-item padding="around-small">
+          <div class="header-column">
+            <p class="field-title" title="memberPlanId">Member Plan Id</p>
+            <p>
+              <lightning-formatted-text
+                value={memberPlanId}
+              ></lightning-formatted-text>
+            </p>
+          </div>
+        </lightning-layout-item>
 
-        <template if:true={error}>
-            <lightning-card>
-                <span class="slds-align_absolute-center">error loading claim lines</span>
-            </lightning-card>    
-        </template>
-    </lightning-card>
- 
+        <lightning-layout-item padding="around-small">
+          <div class="header-column">
+            <p class="field-title" title="ClaimRollUpAmt">Claim Roll Up Amt</p>
+            <p>
+              <lightning-formatted-number
+                value={claimAmountRollup}
+                format-style="currency"
+                currency-code="USD"
+              ></lightning-formatted-number>
+            </p>
+          </div>
+        </lightning-layout-item>
+        <lightning-layout-item padding="around-small">
+          <div class="header-column">
+            <p class="field-title" title="claimAdjudicatedDate">
+              Adjudicated Date
+            </p>
+            <p>
+              <lightning-formatted-date-time
+                value={claimAdjudicatedDate}
+              ></lightning-formatted-date-time>
+            </p>
+          </div>
+        </lightning-layout-item>
+        <lightning-layout-item padding="around-small">
+          <div class="header-column">
+            <p class="field-title" title="claimAdjudicatedAmt">
+              Adjudicated Amt
+            </p>
+            <p>
+              <lightning-formatted-number
+                value={claimAdjudicatedAmt}
+                format-style="currency"
+                currency-code="USD"
+              ></lightning-formatted-number>
+            </p>
+          </div>
+        </lightning-layout-item>
+      </lightning-layout>
+    </template>
+    <template if:false={claimId}>
+      <lightning-card>
+        <span class="slds-align_absolute-center">Please select a claim</span>
+      </lightning-card>
+    </template>
+    <template if:false={claimHeader.data}>
+      <lightning-card>
+        <span class="slds-align_absolute-center"
+          >No claim header available</span
+        >
+      </lightning-card>
+    </template>
 
+    <template if:true={error}>
+      <lightning-card>
+        <span class="slds-align_absolute-center"
+          >error loading claim lines</span
+        >
+      </lightning-card>
+    </template>
+  </lightning-card>
 </template>

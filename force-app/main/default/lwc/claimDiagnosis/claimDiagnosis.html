@@ -9,12 +9,13 @@
         <template if:true={isLoading}>
             <lightning-spinner alternative-text="Loading" size="small" variant="brand"></lightning-spinner>
         </template>
-        <template if:true={claimDiagnosis.data}>
+        <template if:true={claimDiagnosis}>
+            <lightning-button label="Edit" variant="success" slot="actions" onclick={navigateToRelatedList}></lightning-button>
             <div class="slds-scrollable_y">
 
                 <lightning-datatable
                     key-field="id"
-                    data={claimDiagnosis.data}
+                    data={claimDiagnosis}
                     columns={columns}>
               </lightning-datatable>
             </div>
@@ -24,7 +25,7 @@
                 <span class="slds-align_absolute-center">Please select a claim</span>
             </lightning-card>
         </template>
-        <template if:false={claimDiagnosis.data}>
+        <template if:false={claimDiagnosis}>
             <lightning-card>
                 <span class="slds-align_absolute-center">No claim Diagnosis available</span>
             </lightning-card>
