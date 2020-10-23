@@ -4,25 +4,29 @@ import { deleteRecord } from "lightning/uiRecordApi";
 
 import getClaimLineList from "@salesforce/apex/ClaimViewController.getClaimLineList";
 import { refreshApex } from "@salesforce/apex";
+import { updateRecord } from 'lightning/uiRecordApi';
 
 //import { subscribe, MessageContext } from 'lightning/messageService';
 //import CLAIM_SELECTED_CHANNEL from '@salesforce/messageChannel/Claim_Selected__c';
 
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
-const SUCCESS_TITLE = "Claim Status ID Reset!";
+const SUCCESS_TITLE = "Success";
 const SUCCESS_VARIANT = "success";
-const ERROR_TITLE = "Claim Status ID Reset Issue!";
+const ERROR_TITLE = "Error";
 const ERROR_VARIANT = "error";
 
-const columns = [
+const readonly_columns = [
   { label: "Name", fieldName: "Name", type: "text" },
-  {
-    label: "Procedure Name",
-    fieldName: "ProcedureCPTHCPCSId__c",
-    type: "text"
-  },
+  { label: "Procedure Name", fieldName: "ProcedureCPTHCPCSId__c", type: "text" },
   { label: "Line Status", fieldName: "ClaimStatusId__c", type: "text" },
   { label: "Location", fieldName: "Location__c", type: "text" }
+];
+
+const editable_columns = [
+  { label: "Name", fieldName: "Name", type: "text", editable: "true" },
+  { label: "Procedure Name", fieldName: "ProcedureCPTHCPCSId__c", type: "text", editable: "true" },
+  { label: "Line Status", fieldName: "ClaimStatusId__c", type: "text", editable: "true" },
+  { label: "Location", fieldName: "Location__c", type: "text", editable: "true" }
 ];
 
 export default class ClaimLine extends NavigationMixin(LightningElement) {
@@ -31,18 +35,16 @@ export default class ClaimLine extends NavigationMixin(LightningElement) {
   claimLines = [];
   error;
   isLoading = false;
-  columns = columns;
-  //selectedClaimLine = {};
+  //columns = claimLineColumns;
+  draftValues = [];
   headerCount = 0;
 
   @wire(getClaimLineList, { ClaimId: '$claimId'})
-  wiredClaimLineRecord( {error, data} ) {
-      if (data) {
-          this.isloading = true;
-          //console.log('apex result ' + JSON.stringify(result));
-          //this.claimLines.Name = `<a data-record-id=${claimLine.Id} onclick=${navigateToRecord} title=${claimLine.Name}>${claimLine.Name}</a>`;
+  wiredClaimLineRecord(results) {
+          //console.log(`wire apex claim line: ${this.claimId}`);
+          /*
           let prepClaimLines = [];
-          data.forEach(asset => {
+          results.data.forEach(asset => {
               let prepClaimLine = {};
               prepClaimLine.Id = asset.Id;
               prepClaimLine.Name = asset.Name;
@@ -52,16 +54,17 @@ export default class ClaimLine extends NavigationMixin(LightningElement) {
               prepClaimLines.push(prepClaimLine);
           });
           this.claimLines = prepClaimLines;
-          this.headerCount = this.claimLines.length;
-          this.claimLineCount();
+          */
+          this.claimLines = results;
+          //this.headerCount = this.claimLines.length;
           this.error = undefined;
           this.isloading = false;
-      } else if (error) {
-          this.error = error;
+        if (results.error) {
+          this.error = results.error;
           this.claimLines = undefined;
           this.headerCount = 0;
           this.isloading = false;
-      }
+        }
   }
 
   navigateToRelatedList() {
@@ -84,12 +87,6 @@ claimLineCount() {
   this.dispatchEvent(countEvent);
   /*
   console.log('dispatchEvent ' + JSON.stringify(select));
-  const evt = new ShowToastEvent({
-      title: SUCCESS_TITLE ,
-      message:  `headerCount: ${this.headerCount}`,
-      variant: SUCCESS_VARIANT
-      });
-      this.dispatchEvent(evt); 
   */
   
 }
@@ -97,6 +94,53 @@ claimLineCount() {
 get editClaim() {
   return (this.claimStatus === "Draft") ? true : false;
 }
+
+renderedCallback() {
+  if(this.claimLines.length > 0) {
+    console.log(`claim line renderedCallback: ${this.claimId}`);
+    this.claimLineCount();
+  }
+}
+
+get claimLineColumns() { 
+  return (this.claimStatus === "Draft") ? editable_columns : readonly_columns;
+}
+
+connectedCallback() {
+  console.log(`claim line connectedCallback:`);
+}
+
+claimLineSave(event) {
+  const recordInputs =  event.detail.draftValues.slice().map(draft => {
+      const fields = Object.assign({}, draft);
+      return { fields };
+  });
+
+  const promises = recordInputs.map(recordInput => updateRecord(recordInput));
+  Promise.all(promises).then(claimLines => {
+      this.dispatchEvent(
+          new ShowToastEvent({
+              title: SUCCESS_TITLE,
+              message: 'Claim Line(s) updated',
+              variant: SUCCESS_VARIANT
+          })
+      );
+       // Clear all draft values
+       this.draftValues = [];
+
+       // Display fresh data in the datatable
+       return refreshApex(this.claimLines);
+  }).catch(error => {
+      // Handle error
+      this.dispatchEvent(
+        new ShowToastEvent({
+            title: ERROR_TITLE,
+            message: error.body.message,
+            variant: ERROR_VARIANT
+        })
+      )
+    });
+  }
 
   /*
 

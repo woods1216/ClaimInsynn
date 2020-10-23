@@ -32,23 +32,24 @@ export default class ClaimHeader extends NavigationMixin(LightningElement) {
     error;
     @api claimId;
     //claimStatus;
-    claimHeader = undefined;
+    claimHeader;
 
     @wire(getRecord, { recordId: '$claimId', fields: CLAIM_HEAD_FIELDS }) 
-    wiredClaimRecord(result) {
-        this.claimHeader = result;
-        //publishClaimStatus(this.claimId, this.claimStatusId);
-        this.error = undefined;
-        if (result.error) {
+    wiredClaimRecord( { error, data} ) {
+        if (data) {
+            this.claimHeader = data;
+            //publishClaimStatus(this.claimId, this.claimStatusId);
+            this.error = undefined;    
+        } else if (error) {
             this.claimHeader = undefined;
-            this.error = result.error;
+            this.error = error;
         }
     }
 
     handleStatusReset() {
 
         if (!this.claimId) return;
-        if (this.claimHeader.data && this.claimLockStatus) {
+        if (this.claimHeader && this.claimLockStatus) {
 
             // Create the recordInput object
             const fields = {};
@@ -80,41 +81,35 @@ export default class ClaimHeader extends NavigationMixin(LightningElement) {
     }
 
     get claimHeadName() { 
-        return this.claimHeader.data ? getFieldValue(this.claimHeader.data, CLAIM_HEADER_NAME) : "error";
+        return this.claimHeader ? getFieldValue(this.claimHeader, CLAIM_HEADER_NAME) : "error";
     }
     
     get claimStatusId() { 
-        return this.claimHeader.data ? getFieldValue(this.claimHeader.data, CLAIM_STATUS_ID) : "error";
+        return this.claimHeader ? getFieldValue(this.claimHeader, CLAIM_STATUS_ID) : "error";
     }
 
     get claimLockStatus() { 
-        //const evt = new ShowToastEvent({
-        //title: SUCCESS_TITLE ,
-        //message:  `returned Id: ${this.claimStatusId}`,
-        //variant: SUCCESS_VARIANT
-        //});
-        //this.dispatchEvent(evt);
         return (this.claimStatusId === "Draft") ? IS_UNLOCKED : IS_LOCKED;
     }
 
     get claimSubmittedOn() { 
-        return this.claimHeader.data ? getFieldValue(this.claimHeader.data, CLAIM_SUBMIT_ON) : "error";
+        return this.claimHeader ? getFieldValue(this.claimHeader, CLAIM_SUBMIT_ON) : "error";
     }
     
     get memberPlanId() { 
-        return this.claimHeader.data ? getFieldValue(this.claimHeader.data, MEMBER_PLAN_ID) : "error";
+        return this.claimHeader ? getFieldValue(this.claimHeader, MEMBER_PLAN_ID) : "error";
     }
     
     get claimAmountRollup() { 
-        return this.claimHeader.data ? getFieldValue(this.claimHeader.data, CLAIM_AMT_ROLL) : "error";
+        return this.claimHeader ? getFieldValue(this.claimHeader, CLAIM_AMT_ROLL) : "error";
     }
     
     get claimAdjudicatedDate() { 
-        return this.claimHeader.data ? getFieldValue(this.claimHeader.data, CLAIM_ADJUD_DT) : "error";
+        return this.claimHeader ? getFieldValue(this.claimHeader, CLAIM_ADJUD_DT) : "error";
     }
     
     get claimAdjudicatedAmt() { 
-        return this.claimHeader.data ? getFieldValue(this.claimHeader.data, CLAIM_ADJUD_AMT) : "error";
+        return this.claimHeader ? getFieldValue(this.claimHeader, CLAIM_ADJUD_AMT) : "error";
     }
     
     editClaimHeader() {

@@ -1,0 +1,46 @@
+<template>
+    <section class="slds-card">
+        <header class="slds-theme_shade slds-var-p-around_medium slds-var-m-bottom_small">
+            <lightning-progress-indicator current-step={currentStep} type="base" variant="base">
+                <template for:each={steps} for:item="step">
+                    <lightning-progress-step label={step.label} value={step.value} key={step.value}></lightning-progress-step>
+                </template>
+            </lightning-progress-indicator>
+        </header>
+        <!-- Abhisek -->
+            
+
+        <ol class="slds-setup-assistant">
+          <li class="slds-setup-assistant__item">
+            <lightning-card  variant="base" title="Claim Header" icon-name="standard:data_integration_hub">
+                <lightning-button label="Step 1" variant="neutral" slot="actions"></lightning-button>
+                <p class="slds-var-p-horizontal_small">Contains summary information about the claim, such as the payment amount, specified medications, and billing data</p>
+            </lightning-card>
+          </li>
+          <li class="slds-setup-assistant__item">
+            <lightning-card  variant="base" title="Claim Provider" icon-name="custom:custom108">
+                <lightning-button label="Step 2" variant="neutral" slot="actions"></lightning-button>
+              <p class="slds-var-p-horizontal_small">Represents information about a provider of a service, equipment or medication</p>
+            </lightning-card>
+          </li>
+          <li class="slds-setup-assistant__item">
+              <lightning-card  variant="base" title="Claim Diagnosis" icon-name="custom:custom94">
+                <lightning-button label="Step 3" variant="neutral" slot="actions"></lightning-button>
+                <p class="slds-var-p-horizontal_small">Represents the clinical diagnosis for which the service, equipment, or medication was provided</p>
+            </lightning-card>
+          </li>
+          <li class="slds-setup-assistant__item">
+            <lightning-card  variant="base" title="Claim Line" icon-name="custom:custom83">
+                <lightning-button label="Step 4" variant="neutral" slot="actions"></lightning-button>
+              <p class="slds-var-p-horizontal_small">Contains summary information about the claim, such as the payment amount, specified medications, and billing data</p>
+            </lightning-card>
+          </li>
+        
+        </ol>
+
+        
+        <footer class="slds-modal__footer">
+          <lightning-button label="Next" variant="brand" slot="actions" onclick={nextHandler}></lightning-button>
+        </footer>
+      </section>
+</template>

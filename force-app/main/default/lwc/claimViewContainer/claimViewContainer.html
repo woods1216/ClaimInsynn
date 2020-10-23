@@ -1,10 +1,10 @@
 <template>
   <lightning-layout multiple-rows>
     <!-- Top -->
-    <lightning-layout-item size="12" flexibility="auto">
+    <lightning-layout-item size="12" flexibility="auto" class="slds-var-p-top_small slds-is-relative">
       <c-claim-header claim-id={claimId}></c-claim-header>
     </lightning-layout-item>
-    <lightning-layout-item size="12" flexibility="auto">
+    <lightning-layout-item size="12" flexibility="auto" class="slds-var-p-top_small slds-is-relative">
       <c-claim-status claim-id={claimId} claim-status={claimStatus}></c-claim-status>
     </lightning-layout-item>
 
@@ -16,9 +16,9 @@
               <c-claim-line claim-id={claimId} claim-status={claimStatus} onlinecount={handleLinesCount}></c-claim-line>
           </div>
         </lightning-tab>
-        <lightning-tab label={lwcTabDiagnosisLabel} icon-name="custom:custom94">
+        <lightning-tab label={lwcTabDiagnosisLabel} icon-name="custom:custom94" name="diagnosistab">
           <div class="slds-scrollable_y">
-              <c-claim-diagnosis claim-id={claimId} ondiagnosiscount={handleDiagnosisCount}></c-claim-diagnosis>
+              <c-claim-diagnosis claim-id={claimId} claim-status={claimStatus} ondiagnosiscount={handleDiagnosisCount}></c-claim-diagnosis>
           </div>
         </lightning-tab>
 
@@ -32,27 +32,4 @@
     </lightning-layout-item>
   </lightning-layout>
 
-
-          <!--
-        <lightning-tab label="Claim Line3" icon-name="custom:custom83">
-          <div class="slds-scrollable_y">
-              <c-claim-line3 claim-id={claimId}></c-claim-line3>
-          </div>
-        </lightning-tab>
-        <lightning-tab label="Claim Line2" icon-name="custom:custom83">
-          <div class="slds-scrollable_y">
-              <c-claim-line2 claim-id={claimId}></c-claim-line2>
-          </div>
-        </lightning-tab>
-        <lightning-tab label="Claim Line1" icon-name="custom:custom83">
-          <div class="slds-scrollable_y">
-              <c-claim-line1 claim-id={claimId}></c-claim-line1>
-          </div>
-        </lightning-tab>
-        <lightning-tab label="Claim Line" icon-name="custom:custom83">
-          <div class="slds-scrollable_y">
-              <c-claim-line claim-id={claimId}></c-claim-line>
-          </div>
-        </lightning-tab>
-        -->
 </template>

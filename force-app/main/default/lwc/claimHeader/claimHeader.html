@@ -9,7 +9,7 @@
       <lightning-badge label={claimId}></lightning-badge>
     </h3>
 
-    <template if:true={claimHeader.data}>
+    <template if:true={claimHeader}>
       <lightning-badge label={claimHeadName}></lightning-badge>
       <template if:false={claimLockStatus}>
         <lightning-button
@@ -104,24 +104,21 @@
       </lightning-layout>
     </template>
     <template if:false={claimId}>
-      <lightning-card>
-        <span class="slds-align_absolute-center">Please select a claim</span>
-      </lightning-card>
+        <lightning-card>
+            <span class="slds-align_absolute-center">Please select a claim</span>
+        </lightning-card>
     </template>
-    <template if:false={claimHeader.data}>
-      <lightning-card>
-        <span class="slds-align_absolute-center"
-          >No claim header available</span
-        >
-      </lightning-card>
+    <!--
+    <template if:false={claimHeader}>
+        <lightning-card>
+            <span class="slds-align_absolute-center">No claim header available</span>
+        </lightning-card>
     </template>
-
+    -->
     <template if:true={error}>
-      <lightning-card>
-        <span class="slds-align_absolute-center"
-          >error loading claim lines</span
-        >
-      </lightning-card>
+        <lightning-card>
+            <span class="slds-align_absolute-center">error loading claim header</span>
+        </lightning-card>    
     </template>
   </lightning-card>
 </template>

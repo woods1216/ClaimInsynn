@@ -1,8 +1,9 @@
 <template>
-    <lightning-card>
+    
         <h3>
             <lightning-badge label={claimId}></lightning-badge>
        </h3>
+
     <template if:true={statusOptions}>
         <lightning-progress-indicator current-step={currentStatus} type="path" variant="base">
             <template for:each={statusOptions} for:item="statusOption">
@@ -11,12 +12,15 @@
         </lightning-progress-indicator>
     </template>
     <template if:false={statusOptions}>
-        no data
+        <lightning-card>
+            <span class="slds-align_absolute-center">No claim status available</span>
+        </lightning-card>
     </template>
     <template if:true={error}>
-        error
+        <lightning-card>
+            <span class="slds-align_absolute-center">error loading claim status</span>
+        </lightning-card>    
     </template>
 
-    </lightning-card>
     
 </template>

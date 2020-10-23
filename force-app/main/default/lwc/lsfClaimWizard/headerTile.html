@@ -1,0 +1,63 @@
+<template>
+
+    <section class="slds-card">
+        <header class="slds-theme_shade slds-var-p-around_medium slds-var-m-bottom_small">
+            <lightning-progress-indicator current-step={currentStep} type="base" variant="base">
+                <template for:each={steps} for:item="step">
+                    <lightning-progress-step label={step.label} value={step.value} key={step.value}></lightning-progress-step>
+                </template>
+            </lightning-progress-indicator>
+        </header>
+
+            
+
+        <ol class="slds-setup-assistant">
+        
+          <li class="slds-setup-assistant__item">
+            <lightning-card  variant="base" title="Claim Header" icon-name="standard:data_integration_hub">
+                <template if:true={claimId}>
+                  <lightning-button label="Step 1: Complete" variant="success" slot="actions"></lightning-button>
+                </template>
+                <template if:false={claimId}>
+                  <lightning-button label="Step 1" variant="neutral" slot="actions"></lightning-button>
+                </template>
+                
+                <p class="slds-var-p-horizontal_small">Contains summary information about the claim, such as the payment amount, specified medications, and billing data</p>
+            </lightning-card>
+          </li>
+          
+          <li class="slds-setup-assistant__item">
+
+            <template if:true={claimId}>
+              <lightning-record-form
+                record-id={claimId}
+                object-api-name={claimHeaderObject}
+                columns="2"
+                onsuccess={handleClaimHeaderSuccess}
+                layout-type="Compact"
+              >
+              </lightning-record-form>
+            </template>
+
+          <template if:false={claimId}>
+            <lightning-record-form
+              object-api-name={claimHeaderObject}
+              columns="2"
+              onsuccess={handleClaimHeaderSuccess}
+              layout-type="Compact"
+            >
+            </lightning-record-form>
+          </template>
+ 
+          </li>
+          
+
+        </ol>
+    
+
+        <footer class="slds-modal__footer">
+            <lightning-button label="Previous" variant="brand" icon-position="left" onclick={prevHandler}></lightning-button>
+            <lightning-button label="Next" variant="brand" icon-position="right" onclick={nextHandler}></lightning-button>
+        </footer>
+    </section>
+</template>

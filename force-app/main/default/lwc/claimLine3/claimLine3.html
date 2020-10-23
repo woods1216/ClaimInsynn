@@ -7,11 +7,12 @@
         -->
             <lightning-badge label={claimId}></lightning-badge>
         </h3>
+        <lightning-button icon-name="utility:loop" size="large" label="Refresh list" variant="success" slot="actions" onclick={refresh}></lightning-button>
         
         <template if:true={isLoading}>
             <lightning-spinner alternative-text="Loading" size="small" variant="brand"></lightning-spinner>
         </template>
-        <template if:true={claimLines}>
+        <template if:true={claimLines.data}>
             <!-- 
             <lightning-button label="Delete" variant="destructive" slot="actions" onclick={deleteClaimLine}></lightning-button>
             <lightning-button label="Edit" variant="success" slot="actions" onclick={editClaimLine}></lightning-button>
@@ -19,10 +20,9 @@
             <div class="slds-scrollable_y">
                 <lightning-datatable
                 columns={columns}
-                data={claimLines}
+                data={claimLines.data}
                 key-field="id"
-                onrowaction={handleRowAction}
-                ondblclick={handleRowDblClick}>
+                onrowaction={handleRowAction}>
                 </lightning-datatable>
             </div>
         </template>
@@ -31,7 +31,7 @@
                 <span class="slds-align_absolute-center">Please select a claim</span>
             </lightning-card>
         </template>
-        <template if:false={claimLines}>
+        <template if:false={claimLines.data}>
             <lightning-card>
                 <span class="slds-align_absolute-center">No claim lines available</span>
             </lightning-card>

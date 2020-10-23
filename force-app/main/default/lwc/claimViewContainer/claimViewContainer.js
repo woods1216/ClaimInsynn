@@ -55,21 +55,16 @@ export default class ClaimViewContainer extends LightningElement {
 
     }
 
+    renderedCallback() {
+    
+        console.log(`parent renderedCallback: ${this.claimId}`);
+        this.template.querySelector('lightning-tabset').activeTabValue = "diagnosistab";
+    }
     // Standard lifecycle hooks used to sub/unsub to message channel
     connectedCallback() {
         this.subscribeToMessageChannel();
-        /*
-        if (this.claimId) {
-            this.template.querySelector('c-claim-line3').refresh();
-        }
-        const evt = new ShowToastEvent({
-        title: SUCCESS_TITLE ,
-        message:  `claim container Id: ${this.claimId}`,
-        variant: SUCCESS_VARIANT
-        });
-        this.dispatchEvent(evt);
-        //console.log('result ' + JSON.stringify(result));
-        */
+    
+        console.log(`parent connectedCallback:`);
     }
 
     get lwcTabDiagnosisLabel() {

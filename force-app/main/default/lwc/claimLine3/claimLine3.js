@@ -1,4 +1,4 @@
-import { LightningElement, api } from "lwc";
+import { LightningElement, api, wire } from "lwc";
 import getClaimLineList from "@salesforce/apex/ClaimViewController.getClaimLineList";
 //import deleteClaimLine from "@salesforce/apex/ClaimViewController.deleteClaimLine";
 import { NavigationMixin } from "lightning/navigation";
@@ -35,13 +35,38 @@ export default class ClaimLine3 extends NavigationMixin(LightningElement) {
   isLoading = false;
   error;
 
+  @wire(getClaimLineList, { ClaimId: '$claimId' })
+  wiredClaimLineRecord(results) {
+          //console.log(`wire apex claim line: ${this.claimId}`);
+          /*
+          let prepClaimLines = [];
+          results.data.forEach(asset => {
+              let prepClaimLine = {};
+              prepClaimLine.Id = asset.Id;
+              prepClaimLine.Name = asset.Name;
+              prepClaimLine.ProcedureCPTHCPCSId__c = asset.ProcedureCPTHCPCSId__r.Name;
+              prepClaimLine.ClaimStatusId__c = asset.ClaimStatusId__c;
+              prepClaimLine.Location__c = asset.Location__c;
+              prepClaimLines.push(prepClaimLine);
+          });
+          this.claimLines = prepClaimLines;
+          */
+          this.claimLines = results;
+          this.error = undefined;
+          this.isloading = false;
+        if (results.error) {
+          this.error = results.error;
+          this.claimLines = undefined;
+          this.isloading = false;
+        }
+  }
+
   handleRowAction(event) {
     const action = event.detail.action;
     const row = event.detail.row;
     switch (action.name) {
       case "editClaimLine":
         this.editClaimLine(row);
-        refresh();
         break;
       case "deleteClaimLine":
         this.deleteClaimLine(row);
@@ -51,13 +76,13 @@ export default class ClaimLine3 extends NavigationMixin(LightningElement) {
         this.claimLines = rows;
         break;
     }
+    //return refreshApex(this.getClaimLines());
   }
 
   deleteClaimLine(row) {
     deleteRecord(row.Id)
       .then(() => {
         this.error = undefined;
-        refresh();
       })
       .catch((error) => {
         this.error = error;
@@ -76,6 +101,7 @@ export default class ClaimLine3 extends NavigationMixin(LightningElement) {
     });
   }
 
+  /*
   // Imperative Apex call to get claim lines for a claim
   getClaimLines() {
     if (this.claimId == null || this.claimId == "") {
@@ -115,14 +141,12 @@ export default class ClaimLine3 extends NavigationMixin(LightningElement) {
     variant: SUCCESS_VARIANT
     });
     this.dispatchEvent(evt);
-    this.getClaimLines();
   }
+  */
 
   @api
   refresh() {
-    refreshApex(this.getClaimLines());
+    return refreshApex(this.getClaimLines());
   }
-  handleRowDblClick(event) {
 
-  }
 }
