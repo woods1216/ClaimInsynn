@@ -4,7 +4,7 @@
     <consumerSecret>ONhAV80vW8PVbb0zHMKzQif+aJ0cASVMcEEY92ILatc=</consumerSecret>
     <defaultScopes>openid email profile</defaultScopes>
     <executionUser>abhisekp@hotmail.com</executionUser>
-    <friendlyName>Google Auth</friendlyName>
+    <friendlyName>Google Auth Provider</friendlyName>
     <iconUrl>https://login.salesforce.com/icons/google-black.png</iconUrl>
     <includeOrgIdInIdentifier>false</includeOrgIdInIdentifier>
     <providerType>Google</providerType>
