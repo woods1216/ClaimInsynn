@@ -2,7 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>ClaimId__c</fullName>
     <externalId>false</externalId>
-    <inlineHelpText>ID of the claim that this record is related to.</inlineHelpText>
+    <inlineHelpText>ID of the claim that this record is relateds.</inlineHelpText>
     <label>ClaimId</label>
     <referenceTo>ClaimHeader__c</referenceTo>
     <relationshipLabel>ClaimDiagnosis</relationshipLabel>
